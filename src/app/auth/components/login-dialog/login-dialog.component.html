@@ -1,0 +1,31 @@
+<ng-container *ngIf="data$ | async as data">
+  <div class="dialog-content">
+    <div class="left-container"></div>
+    <div class="right-container">
+      <div class="title">Авторизация</div>
+      <form class="form" [formGroup]="form" (ngSubmit)="requestLogin()">
+        <mat-form-field appearance="fill">
+          <mat-label>Эл. почта</mat-label>
+          <input matInput formControlName="email" />
+          @if(form.controls['email'].invalid){
+            <mat-error>{{ getFormErrorMessage(form.controls['email']) }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Пароль</mat-label>
+          <input matInput [type]="passwordHide ? 'password' : 'text'" formControlName="password" />
+          <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Скрыть пароль'" [attr.aria-pressed]="passwordHide">
+            <mat-icon fontSet="material-icons-outlined">{{ passwordHide ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if(form.controls['password'].invalid){
+            <mat-error>{{ getFormErrorMessage(form.controls['password']) }}</mat-error>
+          }
+        </mat-form-field>
+        <button mat-flat-button color="primary" [disabled]="form.invalid || (data.isSubbmiting)">Войти в систему</button>
+        @if(data.validationError){
+          <app-backend-error-messages [backendErrors]="data.validationError"></app-backend-error-messages>
+        }
+      </form>
+    </div>
+  </div>
+</ng-container>

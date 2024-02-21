@@ -1,0 +1,14 @@
+.icon {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  stroke: var(--global-color-grey-1);
+  &.active path,
+  &.active circle {
+    stroke: var(--global-color-blue-1) !important;
+  }
+}

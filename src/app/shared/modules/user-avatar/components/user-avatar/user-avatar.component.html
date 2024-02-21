@@ -1,0 +1,8 @@
+@if(user){
+  <div class="user size-{{ size }}">
+    <div class="avatar">
+      <img src="{{ user.avatar }}" alt="{{ user.displayName }}">
+    </div>
+    <div class="name">{{ user.displayName }}</div>
+  </div>
+}

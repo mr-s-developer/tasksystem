@@ -1,0 +1,82 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$TaskSystem-primary: mat.define-palette(mat.$indigo-palette);
+$TaskSystem-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$TaskSystem-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$TaskSystem-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $TaskSystem-primary,
+      accent: $TaskSystem-accent,
+      warn: $TaskSystem-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($TaskSystem-theme);
+
+// Global variables
+:root {
+  // color
+  --global-color-black-1: rgba(0, 0, 0, 1);
+  --global-color-black-2: rgba(0, 0, 0, 0.06);
+  --global-color-black-3: rgba(0, 0, 0, 0.38);
+  --global-color-white-1: rgba(255, 255, 255, 1);
+  --global-color-white-2: rgba(234, 234, 234, 1);
+  --global-color-white-3: rgba(255, 238, 235, 1);
+  --global-color-grey-light-1: rgba(248, 248, 248, 1);
+  --global-color-grey-light-2: rgba(175, 178, 190, 1);
+  --global-color-grey-1: rgba(72, 72, 72, 1);
+  --global-color-blue-1: rgba(73, 113, 255, 1); 
+  --global-color-blue-2: rgba(43, 83, 225, 1);
+  --global-color-blue-light-1: rgba(240, 241, 255, 1);
+  --global-color-blue-light-2: rgba(73, 113, 255, .5);
+  --global-color-blue-light-3: rgba(73, 113, 255, 0);
+  --global-color-blue-light-4: rgba(73, 113, 255, 0.1);
+  --global-color-red-1: rgba(242, 86, 92, 1);
+  --global-color-red-2: rgba(244, 67, 54, 1);
+  --global-color-red-light-1: rgba(255, 238, 235, 1);
+  --global-color-red-light-2: rgba(242, 86, 92, .5);
+  --global-color-orange-1: rgba(234, 162, 56, 1);
+  --global-color-orange-light-1: rgba(250, 247, 227, 1);
+  --global-color-orange-light-2: rgba(234, 162, 56, .5);
+
+  --global-gradient-blue-1: linear-gradient(90deg, var(--global-color-blue-light-4) 0%, var(--global-color-blue-light-3) 100%);
+}
+
+/* You can add global styles to this file, and also import other style files */
+@import 'assets/fonts/fonts.scss';
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Inter, Roboto, "Helvetica Neue", sans-serif;
+  background: var(--global-color-grey-light-1);
+}
+
+.content {
+  box-sizing: border-box;
+  padding: 20px;
+}

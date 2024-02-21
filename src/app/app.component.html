@@ -1,0 +1,11 @@
+<mat-drawer-container class="container">
+  @if(isAuthenticated$ | async){
+    <mat-drawer class="sidenav" mode="side" opened>
+      <app-logo></app-logo>
+      <app-left-menu></app-left-menu>
+    </mat-drawer>
+  }
+  <div class="sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

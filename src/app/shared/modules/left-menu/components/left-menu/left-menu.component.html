@@ -1,0 +1,58 @@
+<!-- 
+  <app-icon> реализован исключительно из за того что нет доступа 
+  к коллекции иконок и для управления стилями, но при это не включать 
+  громоздкие svg в разметку этого компонента и не добавлять дополнительные
+  svg нужного цвета
+-->
+
+<ul class="left-menu">
+  <li class="left-menu-item" routerLinkActive="active" (isActiveChange)="isActiveChange($event, 'home')" (mouseenter)="isHoverChange(true, 'home')" (mouseleave)="isHoverChange(false, '')">
+    <a [routerLink]="['/home']">
+      <app-icon [name]="'home'" [isHover]="isHover" [isActive]="isActive"></app-icon>
+      Главная страница
+    </a>
+  </li>
+  <li class="left-menu-item" routerLinkActive="active" (isActiveChange)="isActiveChange($event, 'tick-square')" (mouseenter)="isHoverChange(true, 'tick-square')" (mouseleave)="isHoverChange(false, '')">
+    <a [routerLink]="['/tasks']">
+      <app-icon [name]="'tick-square'" [isHover]="isHover" [isActive]="isActive"></app-icon>
+      Управление задачами
+    </a>
+  </li>
+  <li class="left-menu-item" routerLinkActive="active" (isActiveChange)="isActiveChange($event, 'calendar')" (mouseenter)="isHoverChange(true, 'calendar')" (mouseleave)="isHoverChange(false, '')">
+    <a [routerLink]="['/calendar']">
+      <app-icon [name]="'calendar'" [isHover]="isHover" [isActive]="isActive"></app-icon>
+      Календарь
+    </a>
+  </li>
+  <li class="left-menu-item" routerLinkActive="active" (isActiveChange)="isActiveChange($event, 'team')" (mouseenter)="isHoverChange(true, 'team')" (mouseleave)="isHoverChange(false, '')">
+    <a [routerLink]="['/team']">
+      <app-icon [name]="'team'" [isHover]="isHover" [isActive]="isActive"></app-icon>
+      Команда
+      <div *ngIf="badgeTeam > 0" matBadge="{{ badgeTeam }}" matBadgeOverlap="false" class="badge"></div>
+    </a>
+  </li>
+  <li class="left-menu-item" routerLinkActive="active" (isActiveChange)="isActiveChange($event, 'activity')" (mouseenter)="isHoverChange(true, 'activity')" (mouseleave)="isHoverChange(false, '')">
+    <a [routerLink]="['/statistics']">
+      <app-icon [name]="'activity'" [isHover]="isHover" [isActive]="isActive"></app-icon>
+      Статистика
+    </a>
+  </li>
+  <li class="left-menu-item" routerLinkActive="active" (isActiveChange)="isActiveChange($event, 'profile')" (mouseenter)="isHoverChange(true, 'profile')" (mouseleave)="isHoverChange(false, '')">
+    <a [routerLink]="['/profile']">
+      <app-icon [name]="'profile'" [isHover]="isHover" [isActive]="isActive"></app-icon>
+      Профиль
+    </a>
+  </li>
+  <li class="left-menu-item left-menu-line" routerLinkActive="active" (isActiveChange)="isActiveChange($event, 'settings')" (mouseenter)="isHoverChange(true, 'settings')" (mouseleave)="isHoverChange(false, '')">
+    <a [routerLink]="['/settings']">
+      <app-icon [name]="'settings'" [isHover]="isHover" [isActive]="isActive"></app-icon>
+      Настройки
+    </a>
+  </li>
+  <li class="left-menu-item left-menu-logout" (isActiveChange)="isActiveChange($event, 'logout')" (mouseenter)="isHoverChange(true, 'logout')" (mouseleave)="isHoverChange(false, '')">
+    <a (click)="logout()">
+      <app-icon [name]="'logout'" [isHover]="isHover" [isActive]="isActive"></app-icon>
+      Выход из системы
+    </a>
+  </li>
+</ul>

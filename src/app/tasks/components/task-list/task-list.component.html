@@ -1,0 +1,73 @@
+<div class="container">
+  <app-header [title]="'Управление задачами'">
+    <div class="tools">
+      <div class="filter">
+        <div>Сортировка по:</div> 
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-select [(value)]="selected" [panelWidth]="''" (selectionChange)="selectionChange($event)">
+              <mat-option value="">Умолчанию</mat-option>
+              <mat-option *ngFor="let item of taskSortRef" [value]="item.field">{{ item.fieldName }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="btns">
+        <button mat-flat-button color="primary" (click)="openCreateTaskDialog()">Добавить задачу</button>
+      </div>
+    </div>
+  </app-header>
+  <div class="content">
+
+    <mat-card>
+
+      <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Дата Создания </th>
+          <td mat-cell *matCellDef="let element"> {{ element.date | date:'dd MMMM yyyy':'ru' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="executor">
+          <th mat-header-cell *matHeaderCellDef> Исполнитель </th>
+          <td mat-cell *matCellDef="let element"> 
+            <app-user-avatar [user]="element.user" [size]="'small'"></app-user-avatar>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="priority">
+          <th mat-header-cell *matHeaderCellDef> Приоритет задачи </th>
+          <td mat-cell *matCellDef="let element"> 
+            <app-priority [id]="element.priority"></app-priority>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> Название задачи </th>
+          <td mat-cell *matCellDef="let element"> {{ element.title }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="requestRemoveTask($event, element.id)">
+              <mat-icon fontSet="material-icons-round">close</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openViewTaskDialog(row)"></tr>
+      </table>
+      <mat-paginator 
+        [length]="paginator.resultsLength"
+        [hidePageSize]="paginator.hidePageSize"
+        [pageSize]="paginator.pageSize"
+        [pageIndex]="paginator.pageIndex"
+        (page)="paginatorEvent($event)"
+      ></mat-paginator>
+
+    </mat-card>
+
+  </div>
+</div>

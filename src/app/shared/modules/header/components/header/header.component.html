@@ -1,0 +1,9 @@
+<div class="header">
+  <div class="header-top-container">
+    <div class="page-title">{{ pageTitle }}</div>
+    <app-user-avatar [user]="currentUser$ | async"></app-user-avatar>
+  </div>
+  <div class="header-bottom-container">
+    <ng-content></ng-content>
+  </div>
+</div>

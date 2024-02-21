@@ -1,0 +1,62 @@
+<div class="dialog-content">
+  <div class="title">
+    <div>
+      @if(data && data.state == 'create'){
+        <span>Создание новой задачи</span>
+      }
+      @if(data && data.state == 'view'){
+        <span>Просмотр задачи</span>
+      }
+    </div>
+    <div>
+      <button mat-icon-button mat-dialog-close cdkFocusInitial>
+        <mat-icon fontSet="material-icons-round">close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="form">
+    <form [formGroup]="form">
+      <div class="form-group-fields">
+        <div class="form-field form-datepicker">
+          <div class="form-label">Дата создания</div>
+          <mat-form-field (click)="picker.open()">
+            <input matInput formControlName="date" [matDatepicker]="picker" readonly>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="form-field form-title">
+          <div class="form-label">Название*</div>
+          <mat-form-field>
+            <input matInput formControlName="title">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-field form-description">
+        <div class="form-label">Описание</div>
+        <mat-form-field>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="form-field form-priority">
+        <div class="form-label">Приоритет задачи*</div>
+        <mat-radio-group formControlName="priority">
+          <mat-radio-button value="high" color="accent">Высокий</mat-radio-button>
+          <mat-radio-button value="average" color="warn">Средний</mat-radio-button>
+          <mat-radio-button value="low" color="primary">Низкий</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="form-field form-priority">
+        <div class="form-label">Исполнитель*</div>
+        <mat-form-field>
+          <mat-select formControlName="userId">
+            <mat-option *ngFor="let user of users$ | async" [value]="user.id">{{ user.displayName }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      @if(data && data.state == 'create'){
+        <button mat-flat-button color="primary" (click)="requestSaveTask()" [disabled]="form.invalid">Сохранить</button>
+        <button mat-flat-button color="primary" (click)="requestSaveTask('draft')" class="btn-save-draft">Сохранить как черновик</button>
+      }
+    </form>
+  </div>
+</div>
